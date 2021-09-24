@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% if user == current_user %}
+
+{% endif %}
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <!-- displaying  Username-->
+    <div class="col-md-4">
+      <h3>Author:  {{user.author| capitalize}} </h3>
+      <br>
+      <hr>
+      <a href="{{url_for('main.update_profile',uname=user.author)}}">Edit profile</a>
+      
+      <!--Displaying user bio-->
+      {% if user.bio %}
+      <br>
+      <h4>{{user.bio}}</h4>
+      {%else%}
+      <br>
+      <p> {{user.author| capitalize}} has no bio </p>
+      {% endif %}
+    </div>
+
+    <!--Display profile photo-->
+    <div class="col-md-8">
+      {% if user.profile_pic_path %}
+
+      <div class="card">
+        <img class="card" src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" height=50%>
+
+
+
+      </div>
+      <div class="row">
+        {%else%}
+
+        <h3><strong>No profile picture</strong></h3>
+
+        {% endif %}
+
+        {% if user == current_user %}
+        <form action="{{url_for('main.update_pic',uname=user.author)}}" method="post" enctype="multipart/form-data">
+          <br>
+          <input type="file"  name="photo" class="form-control" required>
+          <br>
+          <input type="submit">
+
+
+
+      </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endblock %}

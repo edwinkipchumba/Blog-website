@@ -201,3 +201,29 @@ def delete_comment(blogs_id):
     db.session.commit()
 
     return redirect(url_for('main.blogpost', comment=comment, blogpost=blogpost, blogs_id=blogs_id))
+
+# subscribe
+@main.route('/subscribe', methods=['GET','POST'])
+def subscriber():
+
+    subscriber_form=SubscriberForm()
+    blogs = Blogs.query.order_by(Blogs.date.desc()).all()
+
+    if subscriber_form.validate_on_submit():
+
+        subscriber= Subscriber(email=subscriber_form.email.data,name = subscriber_form.name.data)
+
+        db.session.add(subscriber)
+        db.session.commit()
+
+        mail_message("Hello, Welcome To Emdee's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+
+        title= "Emdee's Blog"
+        return render_template('index.html',title=title, blogs=blogs)
+
+    subscriber = Blogs.query.all()
+
+    blog = Blogs.query.all()
+
+
+    return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
