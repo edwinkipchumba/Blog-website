@@ -6,37 +6,43 @@
 
 ## Description
 
-This is an application that allows users to use that one minute wisely. The users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
+This is a personal blogging website where you can create and share your opinions and other users can read and comment on them.
 
 ## Screenshot images
 
-<img src="./app/static/image/pics.png">
+<img src="./app/static/ima">
 
 
 
 ## Live page
-
+https://github.com/edwinkipchumba/Blog-website
 
 
 ## User stories
 
 As a user I would like to:
 
-1. see the pitches other people have posted.
-2. submit a pitch in any gategory.
-3. be signed in for me to leave a comment
-4. view the pitches I have created in my profile page.
-5. comment on the different pitches and leave feedback.
+1. View the blog posts recent on the site.
+2. comment on blog posts.
+3. email alert when a new post is made by joining subscription.
+4. see random quotes on the site.
+5. sign in to the blog.
+6. create a blog from the application.
+7. delete comments that I find insulting/degrading
+8. update/delete blogs I have created
    
 ## Behaviuor Driven Development (BDD)
 
 | Behaviour | Input |Output |
 | :----------------| :-------------------:| :------------------|
-| Display pitch categories| On page load | List of various categories of pitches |
-| Display tabs with category | On tab link click | Clickable links to open pitches by category |
+| Blogger Authentication| On demand | Access Admin dashboard |
+| Display blogs by most recent | On home page | Clickable links to open all blogs |
 | Display profile | Click profile page | Redirected to a page with your profile |
-| Display pitches | On page load | Each pitch displays author, title, pitch, date, comment tab |
-| To add a pitch | Click an add pitch | Redirected to the pitch collection form |
+| Display single blogs | On link click | Blog is displayed with with comment ready function and comments already stored |
+| To add a blog | Through Admin dashboard | Redirected to the blog form collection form |
+| To edit a blog | Through Admin dashboard | Redirected to the blog form collection form and editing happens |
+| To delete a blog/comments | Through Admin dashboard and on display | Bad comments and posts can be deleted | 
+| To subscribe | On button click | Users can subscribe on click | 
 
 ## Installation/Setup instruction
 
@@ -51,16 +57,26 @@ As a user I would like to:
 * Open Terminal {Ctrl+Alt+T}
 
 ```
-$git clone https://github.com/edwinkipchumba/pitch
+$git clone https://github.com/edwinkipchumba/Blog-website
 ```
 ```
-$cd pitch
+$cd blog
 ```
 * open based on the text editor you have.
+  
+* Creating virtual environment
+```
+$ python3.8 -m venv --without-pip virtual
+```
   
 ```
 $ source virtual/bin/activate
 ```
+```
+$ curl https://bootstrap.pypa.io/get-pip.py | python
+```
+
+* Installing Flask and other Modules:
 ```
 (virtual)$ pip install -r requirements.txt 
 ```
