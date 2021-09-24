@@ -31,3 +31,20 @@ def create_app(config_name):
     app.config.from_object(config_options[config_name])
     # configure UploadSet
     configure_uploads(app,photos)
+
+        # Initializing flask extensions
+    Bootstrap(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+    babel = Babel(app)
+    simple.init_app(app)
+
+
+    # Registering the blueprint
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+
+
+    return app
