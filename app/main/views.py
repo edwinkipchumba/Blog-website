@@ -136,8 +136,8 @@ def blogpost(blogs_id):
     comments = Comments.get_comment(blogs_id)
 
     return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
-    
 
+    #  delete post
 @main.route('/blog/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_blog(id):
@@ -153,3 +153,51 @@ def delete_blog(id):
     db.session.commit()
 
     return render_template('index.html', title="Dashboard")
+
+    # edit post
+@main.route('/blog/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_blogpost(id):
+    """
+    Edit a blogpost in the database
+    """
+
+    if not current_user.is_admin:
+        abort(404)
+
+    blogpost = Blogs.query.get(id)
+    form = BlogForm()
+
+    if form.validate_on_submit():
+
+        blogpost.topic = form.topic.data
+        blogpost.content = form.content.data
+        blogpost.title =form.title.data
+
+        # Updated bloginstance
+        db.session.add(blogpost)
+        db.session.commit()
+
+        title='New Blog'
+
+        return redirect(url_for('main.single_blog',id=blogpost.id))
+
+
+    form.title.data = blogpost.title
+    form.content.data = blogpost.content
+    form.topic.data= blogpost.topic
+
+    return render_template('blog.html',action="Edit", blogpost_form= form, legend='Update Post')
+
+    # comment post
+@main.route('/comment/delete/<int:blogs_id>' ,methods=['GET', 'POST'])
+@login_required
+def delete_comment(blogs_id):
+
+    blogpost = Blogs.query.filter_by(id=blogs_id).first()
+    comment = Comments.query.filter_by(blogs_id=blogs_id).first()
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    return redirect(url_for('main.blogpost', comment=comment, blogpost=blogpost, blogs_id=blogs_id))
