@@ -1,0 +1,76 @@
+{% extends 'base.html'%}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Admin Dashboard</h1>
+                    <h3>For administrators only!</h3>
+                    <hr class="intro-divider">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+          <div class="outer">
+            <div class="middle">
+              <div class="inner">
+                <br/>
+
+                <br/>
+                <h1 style="text-align:center;">Blogs</h1>
+
+                  <hr class="intro-divider">
+                  <div class="center">
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th width="15%"> Title</th>
+                          <th width="40%"> Topic </th>
+                          <th width="15%"> Content</th>
+                          <th width="15%"> Edit </th>
+                          <th width="15%"> Delete </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for blogpost in blogposts %}
+                        <tr>
+                          <td> {{ blogpost.title }} </td>
+                          <td> {{ blogpost.topic }} </td>
+                          <td> {{ blogpost.content }} </td>
+                          <td>
+                            <a href="{{ url_for('main.edit_blogpost', id=blogpost.id) }}">
+                              <i class="fa fa-pencil"></i> Edit
+                            </a>
+                          </td>
+                          <td>
+                            <a href="{{ url_for('main.delete_blog', id=blogpost.id) }}">
+                              <i class="fa fa-trash"></i> Delete
+                            </a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style="text-align: center">
+
+                    <hr class="intro-divider">
+
+                  <a href="{{ url_for('main.new_blog') }}" class="btn btn-default btn-lg">
+                    <i class="fa fa-plus"></i>
+                    Add Blogposts
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
