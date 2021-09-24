@@ -26,3 +26,23 @@ def login():
 
     title = "Kolem's Blog login"
     return render_template('auth/login.html',login_form = login_form,title=title)
+
+# registeration form
+@auth.route('/register',methods = ["GET","POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(email = form.email.data,
+         author = form.author.data,
+         password = form.password.data)
+
+        db.session.add(user)
+        db.session.commit()
+
+        
+
+        title = "New Account"
+
+        return redirect(url_for('auth.login'))
+
+    return render_template('auth/register.html',registration_form = form)
