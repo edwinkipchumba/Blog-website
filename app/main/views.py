@@ -67,8 +67,89 @@ def update_pic(uname):
 def admin_dashboard():
     # prevent non-admins from accessing the page
     if not current_user.is_admin:
-        abort(403)
+        abort(404)
 
     blogposts = Blogs.query.all()
 
     return render_template('admin_dashboard.html', title="Dashboard",blogposts=blogposts)
+
+
+@main.route('/blog/', methods = ['GET','POST'])
+@login_required
+def new_blog():
+
+    form = BlogForm()
+
+    if form.validate_on_submit():
+
+        topic = form.topic.data
+        content= form.content.data
+        title=form.title.data
+
+        # Updated bloginstance
+        blogpost = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
+
+        db.session.add(blogpost)
+        db.session.commit()
+
+        title='New Blog'
+
+        subscriber = Subscriber.query.all()
+        for email in subscriber:
+            mail_message("New Blog Post from Kolem's Blog ","email/postnotification",email.email,subscriber=subscriber)
+
+        return redirect(url_for('main.single_blog',id=blogpost.id))
+
+    return render_template('blog.html',blogpost_form= form)
+
+#ability to view single blog addition
+@main.route('/blog/<int:id>')
+def single_blog(id):
+
+    blogpost = Blogs.query.get(id)
+
+    return render_template('oneblogpost.html',blogpost=blogpost)
+
+@main.route('/blogposts')
+def blogpost_list():
+    # Function that renders all blogposts and its content
+
+    blogposts = Blogs.query.all()
+
+
+    return render_template('blogposts.html', blogposts=blogposts)
+
+# viewing comments and respective posts
+@main.route('/blog/new/<int:blogs_id>/',methods=["GET","POST"])
+
+def blogpost(blogs_id):
+    blogpost = Blogs.query.filter_by(id=blogs_id).first()
+    form = CommentForm()
+    if form.validate_on_submit():
+
+        comment = form.comment.data
+        new_blogpost_comment = Comments(comment=comment,blogs_id=blogs_id)
+
+        db.session.add(new_blogpost_comment)
+        db.session.commit()
+
+    comments = Comments.get_comment(blogs_id)
+
+    return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
+    
+
+@main.route('/blog/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_blog(id):
+    """
+    Delete a blogpost from the database
+    """
+    if not current_user.is_admin:
+        abort(404)
+
+    blogpost = Blogs.query.filter_by(id=id).first()
+
+    db.session.delete(blogpost)
+    db.session.commit()
+
+    return render_template('index.html', title="Dashboard")
