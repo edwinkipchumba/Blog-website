@@ -1,5 +1,5 @@
 import unittest
-from app.models import *
+from app.models import User,Comments,Blogs,db,Subscriber
 
 def setUp(self):
         """

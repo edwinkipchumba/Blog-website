@@ -1,11 +1,10 @@
-from flask import render_template
-from flask import render_template,request,redirect,url_for,abort, flash
+from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required,current_user
 from ..email import mail_message
-from ..models import *
+from ..models import User,Comments,Subscriber,Blogs
 from . import main
 from .. import db,photos
-from .forms import *
+from .forms import BlogForm,CommentForm,UpdateProfile,SubscriberForm
 import markdown2
 
 @main.route('/')
@@ -216,9 +215,9 @@ def subscriber():
         db.session.add(subscriber)
         db.session.commit()
 
-        mail_message("Hello, Welcome To Emdee's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+        mail_message("Hello, Welcome To Kolem's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
 
-        title= "Emdee's Blog"
+        title= "Kolem's Blog"
         return render_template('index.html',title=title, blogs=blogs)
 
     subscriber = Blogs.query.all()

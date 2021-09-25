@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/categories.css')}}"> {% endblock %}
+<br>
+<body>
+  {% block content %}
+
+  
+  <div class="jumbotron text-center">
+ -  <style>
+    /* <img src="{{url_for('static',filename='images/home-bg.jpg')}}"> */
+    
+ </style>
+    <h1 class="display-2">Kolem's Blog</h1><br>
+    <small><h4>Express yourself..</h4></small>
+    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+    <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a>
+    </div>
+    </div>
+  <div class="container">
+    <div class="media">
+      <div class="media-left">
+        <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Round&hairColor=BlondeGolden&facialHairType=Blank&facialHairColor=Red&clotheType=GraphicShirt&clotheColor=PastelGreen&graphicType=Skull&eyeType=Squint&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Pale" class="media-object" style="width:45px">
+
+    </div>
+      <div class="media-body">
+        <h6 class="media-heading">{{blogpost.title}}</h6>
+
+        <p>{{blogpost.topic}}</p>
+        <p><small><i>{{blogpost.author}} Posted on: {{blogpost.date.strftime('%B %d, %Y')}} </i></small></p>
+      </div>
+      <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete  </button>
+
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Delete Blog?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <form action="{{ url_for('main.delete_blog', id=blogpost.id) }}" method="post">
+                <input class="btn btn-danger" type="submit" value="Delete">
+
+        </form>
+
+            </div>
+          </div>
+        </div>
+        <hr>
+        {% endblock %}
+      </div>
+</body>

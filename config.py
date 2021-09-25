@@ -5,7 +5,7 @@ class Config:
     SECRET_KEY=os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://edu:kmox002@localhost/blogs'
 
-
+    #   image uploader
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
     #  email configurations
@@ -16,6 +16,8 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     SUBJECT_PREFIX = 'Kolems Blog!'
     SENDER_EMAIL = 'edwinkolem5@gmail.com'
+
+    # simple mde configuration
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
 

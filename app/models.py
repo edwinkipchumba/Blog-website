@@ -37,8 +37,8 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'Author: {self.author}'
 
-    class Blogs(db.Model):
-        __tablename__= 'blogs'
+class Blogs(db.Model):
+    __tablename__= 'blogs'
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(255))
     topic = db.Column(db.String(255))
@@ -52,7 +52,7 @@ class User(UserMixin,db.Model):
         db.session.commit()
 
     @classmethod
-    def get_blogposts(id):
+    def get_blogposts(id,title):
         blogpost = Blogs.query.filter_by(title=title).all()
         return blogpost
 
@@ -98,8 +98,7 @@ class Role(db.Model):
         
 
 class Subscriber(UserMixin, db.Model):
-       __tablename__="subscribers"
-
+    __tablename__="subscribers"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)

@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<!-- <div class="jumbotron text-center" style="background-image: url('{{ url_for('static', filename='./photos/home-bg.jpg') }}')"> -->
+  <h1 class="display-2">Kolem's Blog</h1><br>
+  <small><h4>Express yourself..</h4></small>
+  <div class="btn-group mt-2" role="group" aria-label="Basic example">
+  <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a>
+  </div>
+  </div>
+<div class="container">
+  <div style="width: 60%; height:50%">
+
+<h2>Subscibe to Kolem's Blog</h2>
+<br>
+  {{ wtf.quick_form(subscriber_form) }}
+
+
+</div>
+
+</div>
+
+{% endblock %}
