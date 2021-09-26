@@ -6,23 +6,25 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
 {% endblock %}
 {% block content %}
-<div id="main">
-
-  <body style="background-image:url('../static/images/home-bg.jpg');">
 
 
-    <!-- <div class="jumbotron text-center" style="background-image: url('{{ url_for('static', filename='./images/home-bg.jpeg') }}')"> -->
+  <body style="background-color:#E5DFC6;">
+
+    <div class="jumbotron text-center" style="background-image:url(../static/images/home-bg.jpg)">
+    
 
     <h1 class="display-2 text-center">Kolem's Blog</h1><br>
     <small class="text-center text-ligth">
       <h4>Express yourself...</h4>
     </small>
+    <div>{{quote.quote}}</div>
+    <p>{{quote.author}}</p>
     <div class="btn-group mt-2" role="group" aria-label="Basic example">
 
       <a class="btn btn-danger btn-lg g-8" href="/subscribe">Subscribe</a>
 
     </div>
-</div>
+  </div>
 <div class="row">
   <div class="col-lg-8 col-md-10 mx-auto">
     {% for blog in blogs %}

@@ -6,6 +6,7 @@ from . import main
 from .. import db,photos
 from .forms import BlogForm,CommentForm,UpdateProfile,SubscriberForm
 import markdown2
+from ..request import get_quote
 
 @main.route('/')
 def index():
@@ -14,10 +15,11 @@ def index():
     return
     '''
     blogs = Blogs.query.order_by(Blogs.date.desc()).all()
+    quote = get_quote()
 
 
     title= "Kolem's Blog"
-    return render_template('index.html',title=title, blogs=blogs)
+    return render_template('index.html',title=title, blogs=blogs,quote=quote)
 
 @main.route('/user/<uname>')
 def profile(uname):
