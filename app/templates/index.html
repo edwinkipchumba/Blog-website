@@ -5,20 +5,24 @@
 
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
 {% endblock %}
-{% block content %}
+
+<div class="container">
+  {% block content %}
 
 
   <body style="background-color:#E5DFC6;">
 
-    <div class="jumbotron text-center" style="background-image:url(../static/images/home-bg.jpg)">
+    <div class="jumbotron text-center" style="background-image:url(../static/images/traspare.jpeg)">
     
 
     <h1 class="display-2 text-center">Kolem's Blog</h1><br>
     <small class="text-center text-ligth">
       <h4>Express yourself...</h4>
     </small>
-    <div>{{quote.quote}}</div>
-    <p>{{quote.author}}</p>
+    
+    <div style="text-align:center">{{quote.quote}}</div>
+    <p style="text-align:center">{{quote.author}}</p>
+  
     <div class="btn-group mt-2" role="group" aria-label="Basic example">
 
       <a class="btn btn-danger btn-lg g-8" href="/subscribe">Subscribe</a>
@@ -28,7 +32,7 @@
 <div class="row">
   <div class="col-lg-8 col-md-10 mx-auto">
     {% for blog in blogs %}
-    <div class="preview">
+    <div class="preview" style="text-align: center;">
       <a href="blog/new/{{ blog.id }}">
         <h2 class="title">{{ blog.title }}</h2>
       </a>
@@ -49,14 +53,14 @@
 
 
 <!-- Footer -->
-<footer class="bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <p class="copyright text-muted">Copyright &copy; Kolem Edwin Blog 2021</p>
+<div>
+  <footer class="page-footer">
+      <div class="" style="background-color: hsl(229, 87%, 47%); color:#fff; font-size:12pt; padding: 1%;">
+          <div class="footer-copyright text-center py-3">&#169;Copyright 2021: Kolem Edwin.
+          </div>
       </div>
-    </div>
-  </div>
-</footer>
+  </footer>
+</div>
 {% endblock%}
+</div>
 </body>
