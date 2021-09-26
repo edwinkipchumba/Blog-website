@@ -1,50 +1,60 @@
 {% extends 'base.html'%}
 {% block styles%} {{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/css/bootstrap.min.css')}}"> 
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
 {% endblock %}
 {% block content %}
+<div id="main">
 
-<body style="background-image:url('../static/images/home-bg.jpg');"> 
+  <body style="background-image:url('../static/images/home-bg.jpg');">
 
 
-  <!-- <div class="jumbotron text-center" style="background-image: url('{{ url_for('static', filename='./images/home-bg.jpeg') }}')"> -->
-   
+    <!-- <div class="jumbotron text-center" style="background-image: url('{{ url_for('static', filename='./images/home-bg.jpeg') }}')"> -->
+
     <h1 class="display-2 text-center">Kolem's Blog</h1><br>
-    <small class="text-center text-ligth"><h4>Express yourself...</h4></small>
+    <small class="text-center text-ligth">
+      <h4>Express yourself...</h4>
+    </small>
     <div class="btn-group mt-2" role="group" aria-label="Basic example">
 
-      <a class="btn btn-danger btn-lg float-right" href="/subscribe">Subscribe</a>
-      
+      <a class="btn btn-danger btn-lg g-8" href="/subscribe">Subscribe</a>
+
+    </div>
+</div>
+<div class="row">
+  <div class="col-lg-8 col-md-10 mx-auto">
+    {% for blog in blogs %}
+    <div class="preview">
+      <a href="blog/new/{{ blog.id }}">
+        <h2 class="title">{{ blog.title }}</h2>
+      </a>
+      <p>{{blog.topic}}</p>
+      <p>{{ blog.content}}</p>
+      <small>
+        <p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
+      </small>
+    </div>
+    <hr>
+    {% endfor %}
+    <hr>
   </div>
 </div>
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto" >
-      {% for blog in blogs %}
-      <div class="preview">
-        <a href="blog/new/{{ blog.id }}">
-        <h2 class="title">{{ blog.title }}</h2></a>
-        <p>{{blog.topic}}</p>
-        <p>{{ blog.content}}</p>
-        <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p></small>
+</div>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p class="copyright text-muted">Copyright &copy; Kolem Edwin Blog 2021</p>
       </div>
-      <hr>
-      {% endfor %}
-      <hr>
     </div>
   </div>
-  </div>
+</footer>
+{% endblock%}
 </body>
-
-
-  <!-- Footer -->
-  <footer class="bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <p class="copyright text-muted">Copyright &copy; Kolem Edwin Blog 2021</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  {% endblock%}

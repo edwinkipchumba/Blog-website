@@ -2,9 +2,13 @@ body{
     padding: 0px;
     margin: 0px;
     overflow-x: hidden;
+    
 }
 
 /* footer */
-.bottom{
-    margin-top:20%;
+.copyright{
+    margin-top:100%;
+    color: red;
+    padding: 4px;
+    background-color:black;
 }
