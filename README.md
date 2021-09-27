@@ -10,7 +10,7 @@ This is a personal blogging website where you can create and share your opinions
 
 ## Screenshot images
 
-<img src="./app/static/ima">
+<img src="./app/static/images/001.png">
 
 
 
